@@ -1,7 +1,8 @@
-const jwt = require("jsonwebtoken");
+﻿const jwt = require("jsonwebtoken");
 
 const User = require("../models/User");
 const ApiError = require("../utils/ApiError");
+const { PUBLIC_SIGNUP_ROLE } = require("../utils/constants");
 
 const signToken = (user) => {
   return jwt.sign(
@@ -27,7 +28,7 @@ const sanitizeUser = (user) => ({
   updatedAt: user.updatedAt
 });
 
-const registerUser = async ({ name, email, password, role, department }) => {
+const registerUser = async ({ name, email, password }) => {
   const existingUser = await User.findOne({ email: email.toLowerCase() });
 
   if (existingUser) {
@@ -38,8 +39,8 @@ const registerUser = async ({ name, email, password, role, department }) => {
     name,
     email,
     password,
-    role,
-    department
+    role: PUBLIC_SIGNUP_ROLE,
+    department: ""
   });
 
   const token = signToken(user);

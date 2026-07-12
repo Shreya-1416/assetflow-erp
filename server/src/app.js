@@ -1,15 +1,19 @@
-﻿const express = require("express");
+const path = require("path");
+const express = require("express");
 const cors = require("cors");
 
 const authRoutes = require("./routes/auth.routes");
 const departmentRoutes = require("./routes/departmentRoutes");
 const categoryRoutes = require("./routes/categoryRoutes");
+const employeeRoutes = require("./routes/employeeRoutes");
+const assetRoutes = require("./routes/assetRoutes");
 const errorHandler = require("./middleware/errorHandler");
 
 const app = express();
 
 app.use(cors());
 app.use(express.json());
+app.use("/uploads", express.static(path.join(__dirname, "..", "uploads")));
 
 app.get("/health", (req, res) => {
   res.status(200).json({
@@ -21,6 +25,8 @@ app.get("/health", (req, res) => {
 app.use("/auth", authRoutes);
 app.use("/departments", departmentRoutes);
 app.use("/categories", categoryRoutes);
+app.use("/employees", employeeRoutes);
+app.use("/assets", assetRoutes);
 
 app.use((req, res) => {
   res.status(404).json({
