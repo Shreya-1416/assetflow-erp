@@ -25,8 +25,9 @@ function OrganizationSetup() {
       
       if (deptRes.success) {
         // Map backend keys to frontend keys
-        const mappedDepts = deptRes.data.map(d => ({
-          id: d._id,
+        const depts = deptRes.data.items || deptRes.data || [];
+        const mappedDepts = depts.map(d => ({
+          id: d.id,
           department: d.name,
           head: d.head ? d.head.name : "-",
           parent: "-",
@@ -51,9 +52,9 @@ function OrganizationSetup() {
 
   const handleAddDepartment = async (department) => {
     try {
-      // department from modal contains: { department: "Name", head: "..." }
+      // department from modal contains: { name: "Name", headId: "..." }
       const response = await apiClient.post("/departments", {
-        name: department.department,
+        name: department.name,
         description: department.description || "Added from UI",
         headId: department.headId || null
       });
@@ -62,7 +63,8 @@ function OrganizationSetup() {
         fetchData();
       }
     } catch (error) {
-      alert("Failed to add department");
+      const msg = error.response?.data?.message || "Failed to add department";
+      alert(msg);
     }
   };
 
