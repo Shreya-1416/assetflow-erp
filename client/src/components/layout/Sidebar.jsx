@@ -11,7 +11,7 @@ import {
   FiBell,
 } from "react-icons/fi";
 
-const menu = [
+const menuItems = [
   {
     name: "Dashboard",
     path: "/dashboard",
@@ -61,36 +61,33 @@ const menu = [
 
 function Sidebar() {
   return (
-    <aside className="w-72 bg-slate-900 text-white flex flex-col">
-
-      <div className="text-3xl font-bold p-6 border-b border-slate-700">
-        AssetFlow
+    <aside className="w-64 min-h-screen bg-slate-900 text-white shadow-xl">
+      <div className="p-6 border-b border-slate-700">
+        <h1 className="text-3xl font-bold tracking-wide">
+          AssetFlow
+        </h1>
+        <p className="text-xs text-slate-400 mt-1">Enterprise ERP</p>
       </div>
 
-      <nav className="flex-1 p-4">
-
-        {menu.map((item) => (
-
+      <nav className="p-4 flex flex-col gap-2">
+        {menuItems.map((item) => (
           <NavLink
             key={item.path}
             to={item.path}
             className={({ isActive }) =>
-              `flex items-center gap-3 rounded-lg px-4 py-3 mb-2 transition
-              ${
+              `flex items-center gap-3 px-4 py-3 rounded-lg transition-all ${
                 isActive
-                  ? "bg-blue-600"
-                  : "hover:bg-slate-800"
+                  ? "bg-blue-600 text-white"
+                  : "text-slate-300 hover:bg-slate-800 hover:text-white"
               }`
             }
           >
-            {item.icon}
-            {item.name}
+            <span className="text-xl">{item.icon}</span>
+
+            <span>{item.name}</span>
           </NavLink>
-
         ))}
-
       </nav>
-
     </aside>
   );
 }
