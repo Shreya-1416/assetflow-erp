@@ -1,0 +1,30 @@
+{
+  "name": "assetflow-erp-server",
+  "version": "1.0.0",
+  "description": "Backend API for AssetFlow ERP",
+  "main": "server.js",
+  "scripts": {
+    "dev": "nodemon server.js",
+    "start": "node server.js",
+    "check": "node --check server.js && node --check src/app.js && node --check src/config/db.js && node --check src/controllers/auth.controller.js && node --check src/middleware/auth.js && node --check src/middleware/errorHandler.js && node --check src/middleware/roles.js && node --check src/models/User.js && node --check src/routes/auth.routes.js && node --check src/services/auth.service.js && node --check src/utils/ApiError.js && node --check src/utils/asyncHandler.js && node --check src/utils/constants.js && node --check src/validations/auth.validation.js"
+  },
+  "keywords": [
+    "assetflow",
+    "erp",
+    "express",
+    "mongodb"
+  ],
+  "author": "",
+  "license": "MIT",
+  "dependencies": {
+    "bcryptjs": "^2.4.3",
+    "cors": "^2.8.5",
+    "dotenv": "^16.4.5",
+    "express": "^4.19.2",
+    "jsonwebtoken": "^9.0.2",
+    "mongoose": "^8.5.1"
+  },
+  "devDependencies": {
+    "nodemon": "^3.1.4"
+  }
+}
