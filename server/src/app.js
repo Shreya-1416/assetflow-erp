@@ -7,6 +7,7 @@ const departmentRoutes = require("./routes/departmentRoutes");
 const categoryRoutes = require("./routes/categoryRoutes");
 const employeeRoutes = require("./routes/employeeRoutes");
 const assetRoutes = require("./routes/assetRoutes");
+const allocationRoutes = require("./routes/allocationRoutes");
 const errorHandler = require("./middleware/errorHandler");
 
 const app = express();
@@ -27,6 +28,7 @@ app.use("/departments", departmentRoutes);
 app.use("/categories", categoryRoutes);
 app.use("/employees", employeeRoutes);
 app.use("/assets", assetRoutes);
+app.use("/allocations", allocationRoutes);
 
 app.use((req, res) => {
   res.status(404).json({
