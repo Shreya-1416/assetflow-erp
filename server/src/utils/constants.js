@@ -12,9 +12,30 @@ const ASSET_HISTORY_ACTION = {
   CREATED: "Created",
   UPDATED: "Updated",
   STATUS_CHANGED: "Status Changed",
+  ALLOCATED: "Allocated",
+  TRANSFER_REQUESTED: "Transfer Requested",
+  TRANSFER_APPROVED: "Transfer Approved",
+  TRANSFER_REJECTED: "Transfer Rejected",
+  RETURNED: "Returned",
   SOFT_DELETED: "Soft Deleted"
 };
 const ASSET_HISTORY_ACTIONS = Object.values(ASSET_HISTORY_ACTION);
+const ALLOCATION_STATUSES = ["Active", "Returned", "Transferred", "Cancelled"];
+const TRANSFER_REQUEST_STATUSES = ["Pending", "Approved", "Rejected", "Cancelled"];
+const NOTIFICATION_EVENT_TYPES = [
+  "Asset Allocated",
+  "Asset Returned",
+  "Transfer Requested",
+  "Transfer Approved",
+  "Transfer Rejected"
+];
+const ACTIVITY_LOG_ACTIONS = [
+  "Asset Allocation Created",
+  "Asset Allocation Returned",
+  "Asset Transfer Requested",
+  "Asset Transfer Approved",
+  "Asset Transfer Rejected"
+];
 
 module.exports = {
   USER_ROLES,
@@ -23,5 +44,9 @@ module.exports = {
   ASSET_STATUSES,
   ASSET_CONDITIONS,
   ASSET_HISTORY_ACTION,
-  ASSET_HISTORY_ACTIONS
+  ASSET_HISTORY_ACTIONS,
+  ALLOCATION_STATUSES,
+  TRANSFER_REQUEST_STATUSES,
+  NOTIFICATION_EVENT_TYPES,
+  ACTIVITY_LOG_ACTIONS
 };
