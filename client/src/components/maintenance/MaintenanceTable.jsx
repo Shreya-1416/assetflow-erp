@@ -1,37 +1,10 @@
 import StatusBadge from "../organization/StatusBadge";
 
-function MaintenanceTable() {
-  const requests = [
-    {
-      id: "MR001",
-      asset: "Dell Latitude 7420",
-      technician: "Rahul Sharma",
-      priority: "High",
-      status: "Active",
-    },
-    {
-      id: "MR002",
-      asset: "HP LaserJet Pro",
-      technician: "Priya Singh",
-      priority: "Medium",
-      status: "Inactive",
-    },
-    {
-      id: "MR003",
-      asset: "Conference Projector",
-      technician: "Amit Verma",
-      priority: "Low",
-      status: "Active",
-    },
-  ];
-
+function MaintenanceTable({ requests = [] }) {
   return (
     <div className="overflow-hidden rounded-xl border border-slate-200 bg-white shadow-md">
-
       <table className="w-full">
-
         <thead className="bg-slate-900 text-white">
-
           <tr>
             <th className="px-6 py-4 text-left">Request ID</th>
             <th className="px-6 py-4 text-left">Asset</th>
@@ -40,54 +13,50 @@ function MaintenanceTable() {
             <th className="px-6 py-4 text-center">Status</th>
             <th className="px-6 py-4 text-center">Action</th>
           </tr>
-
         </thead>
 
         <tbody>
-
           {requests.map((request) => (
-
             <tr
-              key={request.id}
+              key={request._id}
               className="border-t hover:bg-slate-50"
             >
-
-              <td className="px-6 py-4 font-medium">
-                {request.id}
+              <td className="px-6 py-4 font-medium font-mono text-xs text-slate-500">
+                {request._id.substring(0, 8)}...
               </td>
 
               <td className="px-6 py-4">
-                {request.asset}
+                {request.asset?.name || "-"}
               </td>
 
               <td className="px-6 py-4">
-                {request.technician}
+                {request.technician?.name || "-"}
               </td>
 
               <td className="px-6 py-4">
-                {request.priority}
+                {request.priority || "-"}
               </td>
 
               <td className="px-6 py-4 text-center">
-                <StatusBadge status={request.status} />
+                <StatusBadge status={request.status === 'Pending' ? 'Inactive' : 'Active'} />
               </td>
 
               <td className="px-6 py-4 text-center">
-
-                <button className="rounded-lg bg-blue-100 px-4 py-2 text-sm text-blue-700 hover:bg-blue-600 hover:text-white">
+                <button className="rounded-lg bg-blue-100 px-4 py-2 text-sm text-blue-700 hover:bg-blue-600 hover:text-white transition">
                   View
                 </button>
-
               </td>
-
             </tr>
-
           ))}
-
+          {requests.length === 0 && (
+            <tr>
+              <td colSpan="6" className="px-6 py-8 text-center text-slate-500">
+                No maintenance requests found
+              </td>
+            </tr>
+          )}
         </tbody>
-
       </table>
-
     </div>
   );
 }

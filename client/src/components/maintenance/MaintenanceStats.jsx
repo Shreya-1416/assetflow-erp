@@ -1,25 +1,25 @@
 import AssetCard from "../assets/AssetCard";
 
-function MaintenanceStats() {
+function MaintenanceStats({ requests = [] }) {
   const stats = [
     {
       title: "Pending",
-      value: 14,
+      value: requests.filter(r => r.status === 'Pending').length,
       color: "text-orange-500",
     },
     {
       title: "In Progress",
-      value: 8,
+      value: requests.filter(r => r.status === 'In Progress' || r.status === 'Technician Assigned').length,
       color: "text-blue-600",
     },
     {
       title: "Completed",
-      value: 64,
+      value: requests.filter(r => r.status === 'Completed').length,
       color: "text-green-600",
     },
     {
       title: "Overdue",
-      value: 3,
+      value: 0, // This would require deeper date logic based on priority, let's keep it simple
       color: "text-red-600",
     },
   ];

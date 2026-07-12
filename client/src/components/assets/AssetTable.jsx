@@ -1,30 +1,6 @@
 import StatusBadge from "../organization/StatusBadge";
 
-function AssetTable({ onView }) {
-  const assets = [
-    {
-      id: "AST-001",
-      name: "Dell Latitude 7420",
-      category: "Laptop",
-      department: "Engineering",
-      status: "Active",
-    },
-    {
-      id: "AST-002",
-      name: "Epson Projector",
-      category: "Projector",
-      department: "Operations",
-      status: "Active",
-    },
-    {
-      id: "AST-003",
-      name: "HP LaserJet Pro",
-      category: "Printer",
-      department: "Facilities",
-      status: "Inactive",
-    },
-  ];
-
+function AssetTable({ assets = [], onView }) {
   return (
     <div className="overflow-hidden rounded-xl border border-slate-200 bg-white shadow-md">
       <table className="w-full">
@@ -42,28 +18,35 @@ function AssetTable({ onView }) {
         <tbody>
           {assets.map((asset) => (
             <tr
-              key={asset.id}
+              key={asset._id}
               className="border-t hover:bg-slate-50"
             >
-              <td className="px-6 py-4 font-medium">{asset.id}</td>
+              <td className="px-6 py-4 font-medium">{asset.serialNumber}</td>
               <td className="px-6 py-4">{asset.name}</td>
-              <td className="px-6 py-4">{asset.category}</td>
-              <td className="px-6 py-4">{asset.department}</td>
+              <td className="px-6 py-4">{asset.category?.name || "-"}</td>
+              <td className="px-6 py-4">{asset.department?.name || "-"}</td>
 
               <td className="px-6 py-4 text-center">
-                <StatusBadge status={asset.status} />
+                <StatusBadge status={asset.status === 'Available' ? 'Active' : 'Inactive'} />
               </td>
 
               <td className="px-6 py-4 text-center">
                 <button
-  onClick={() => onView(asset)}
-  className="rounded-lg bg-blue-100 px-4 py-2 text-sm text-blue-700 transition hover:bg-blue-600 hover:text-white"
->
-  View
-</button>
+                  onClick={() => onView(asset)}
+                  className="rounded-lg bg-blue-100 px-4 py-2 text-sm text-blue-700 transition hover:bg-blue-600 hover:text-white"
+                >
+                  View
+                </button>
               </td>
             </tr>
           ))}
+          {assets.length === 0 && (
+            <tr>
+              <td colSpan="6" className="px-6 py-8 text-center text-slate-500">
+                No assets found
+              </td>
+            </tr>
+          )}
         </tbody>
       </table>
     </div>

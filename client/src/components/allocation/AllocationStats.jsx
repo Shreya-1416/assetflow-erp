@@ -1,25 +1,25 @@
 import AssetCard from "../assets/AssetCard";
 
-function AllocationStats() {
+function AllocationStats({ allocations = [] }) {
   const stats = [
     {
       title: "Allocated",
-      value: 164,
+      value: allocations.filter(a => a.status === 'Active').length,
       color: "text-blue-600",
     },
     {
       title: "Pending",
-      value: 14,
+      value: 0,
       color: "text-orange-500",
     },
     {
       title: "Transferred",
-      value: 58,
+      value: 0,
       color: "text-green-600",
     },
     {
       title: "Returned",
-      value: 43,
+      value: allocations.filter(a => a.status === 'Returned').length,
       color: "text-red-500",
     },
   ];

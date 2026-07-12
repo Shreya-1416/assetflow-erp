@@ -14,7 +14,9 @@ function Navbar() {
           apiClient.get("/system/notifications")
         ]);
         
-        if (profileRes.success) {
+        if (profileRes.success && profileRes.data?.user) {
+          setProfile(profileRes.data.user);
+        } else if (profileRes.success) {
           setProfile(profileRes.data);
         }
         

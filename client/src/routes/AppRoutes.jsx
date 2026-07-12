@@ -1,6 +1,7 @@
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 
 import Login from "../pages/Auth/Login";
+import Signup from "../pages/Auth/Signup";
 import Dashboard from "../pages/Dashboard/Dashboard";
 import OrganizationSetup from "../pages/OrganizationSetup/OrganizationSetup";
 import Assets from "../pages/Assets/Assets";
@@ -21,6 +22,7 @@ export default function AppRoutes() {
       <Routes>
 
         <Route path="/" element={<Login />} />
+        <Route path="/signup" element={<Signup />} />
 
         <Route element={<MainLayout />}>
 

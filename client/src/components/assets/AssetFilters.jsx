@@ -1,6 +1,6 @@
 import { FiSearch } from "react-icons/fi";
 
-function AssetFilters() {
+function AssetFilters({ onAddClick }) {
   return (
     <div className="flex flex-col gap-4 md:flex-row md:justify-between">
       <div className="relative w-full md:w-96">
@@ -13,7 +13,7 @@ function AssetFilters() {
         />
       </div>
 
-      <button className="rounded-lg bg-blue-600 px-6 py-3 font-semibold text-white hover:bg-blue-700">
+      <button onClick={onAddClick} className="rounded-lg bg-blue-600 px-6 py-3 font-semibold text-white hover:bg-blue-700">
         + Add Asset
       </button>
     </div>

@@ -1,63 +1,44 @@
 import StatusBadge from "./StatusBadge";
 
-function DepartmentTable() {
-  const departments = [
-    {
-      id: 1,
-      department: "Engineering",
-      head: "Aditi Rao",
-      parent: "-",
-      status: "Active",
-    },
-    {
-      id: 2,
-      department: "Facilities",
-      head: "Rohan Mehta",
-      parent: "-",
-      status: "Active",
-    },
-    {
-      id: 3,
-      department: "Field Operations",
-      head: "Sana Iqbal",
-      parent: "Operations",
-      status: "Inactive",
-    },
-  ];
-
+function EmployeeTable({ employees = [] }) {
   return (
     <div className="bg-white rounded-xl shadow-md border border-slate-200 overflow-hidden">
       <table className="w-full">
         <thead className="bg-slate-900 text-white">
           <tr>
+            <th className="px-6 py-4 text-left">Name</th>
+            <th className="px-6 py-4 text-left">Email</th>
+            <th className="px-6 py-4 text-left">Role</th>
             <th className="px-6 py-4 text-left">Department</th>
-            <th className="px-6 py-4 text-left">Department Head</th>
-            <th className="px-6 py-4 text-left">Parent Department</th>
             <th className="px-6 py-4 text-center">Status</th>
             <th className="px-6 py-4 text-center">Actions</th>
           </tr>
         </thead>
 
         <tbody>
-          {departments.map((dept) => (
+          {employees.map((emp) => (
             <tr
-              key={dept.id}
+              key={emp._id}
               className="border-t border-slate-200 hover:bg-slate-50 transition-colors duration-200"
             >
               <td className="px-6 py-4 font-medium text-slate-800">
-                {dept.department}
+                {emp.name}
               </td>
 
               <td className="px-6 py-4 text-slate-600">
-                {dept.head}
+                {emp.email}
               </td>
 
               <td className="px-6 py-4 text-slate-600">
-                {dept.parent}
+                {emp.role}
+              </td>
+
+              <td className="px-6 py-4 text-slate-600">
+                {emp.department || "-"}
               </td>
 
               <td className="px-6 py-4 text-center">
-                <StatusBadge status={dept.status} />
+                <StatusBadge status={emp.isActive ? "Active" : "Inactive"} />
               </td>
 
               <td className="px-6 py-4 text-center">
@@ -69,10 +50,17 @@ function DepartmentTable() {
               </td>
             </tr>
           ))}
+          {employees.length === 0 && (
+            <tr>
+              <td colSpan="6" className="px-6 py-8 text-center text-slate-500">
+                No employees found
+              </td>
+            </tr>
+          )}
         </tbody>
       </table>
     </div>
   );
 }
 
-export default DepartmentTable;
+export default EmployeeTable;

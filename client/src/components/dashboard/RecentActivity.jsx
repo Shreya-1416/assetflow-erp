@@ -44,7 +44,7 @@ function RecentActivity() {
                   {new Date(log.createdAt).toLocaleString()}
                 </span>
               </div>
-              <p className="text-sm text-slate-600">{log.details || "No additional details"}</p>
+              <p className="text-sm text-slate-600">{log.message || "No additional details"}</p>
             </div>
           ))}
         </div>
