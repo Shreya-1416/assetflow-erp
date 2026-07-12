@@ -1,9 +1,13 @@
 import StatusBadge from "./StatusBadge";
 
-function DepartmentTable({ departments }) {
+function DepartmentTable({
+  departments,
+  onEdit,
+  onDelete,
+}) {
   return (
-    <div className="overflow-hidden rounded-xl border border-slate-200 bg-white shadow-md">
-      <table className="w-full">
+    <div className="overflow-x-auto rounded-xl border border-slate-200 bg-white shadow-md">
+      <table className="min-w-full">
         <thead className="bg-slate-900 text-white">
           <tr>
             <th className="px-6 py-4 text-left">Department</th>
@@ -15,34 +19,59 @@ function DepartmentTable({ departments }) {
         </thead>
 
         <tbody>
-          {departments.map((dept) => (
-            <tr
-              key={dept.id}
-              className="border-t hover:bg-slate-50"
-            >
-              <td className="px-6 py-4 font-medium">
-                {dept.department}
-              </td>
+          {departments.length > 0 ? (
+            departments.map((dept) => (
+              <tr
+                key={dept.id}
+                className="border-t transition hover:bg-slate-50"
+              >
+                <td className="px-6 py-4 font-semibold text-slate-800">
+                  {dept.department}
+                </td>
 
-              <td className="px-6 py-4">
-                {dept.head}
-              </td>
+                <td className="px-6 py-4">
+                  {dept.head}
+                </td>
 
-              <td className="px-6 py-4">
-                {dept.parent}
-              </td>
+                <td className="px-6 py-4">
+                  {dept.parent || "-"}
+                </td>
 
-              <td className="px-6 py-4 text-center">
-                <StatusBadge status={dept.status} />
-              </td>
+                <td className="px-6 py-4 text-center">
+                  <StatusBadge status={dept.status} />
+                </td>
 
-              <td className="px-6 py-4 text-center">
-                <button className="rounded bg-blue-100 px-4 py-2 text-blue-700 hover:bg-blue-600 hover:text-white">
-                  Edit
-                </button>
+                <td className="px-6 py-4">
+                  <div className="flex items-center justify-center gap-3">
+
+                    <button
+                      onClick={() => onEdit(dept)}
+                      className="rounded-lg bg-blue-600 px-4 py-2 text-sm font-medium text-white transition hover:bg-blue-700"
+                    >
+                      Edit
+                    </button>
+
+                    <button
+                      onClick={() => onDelete(dept.id)}
+                      className="rounded-lg bg-red-600 px-4 py-2 text-sm font-medium text-white transition hover:bg-red-700"
+                    >
+                      Delete
+                    </button>
+
+                  </div>
+                </td>
+              </tr>
+            ))
+          ) : (
+            <tr>
+              <td
+                colSpan={5}
+                className="py-10 text-center text-slate-500"
+              >
+                No departments available.
               </td>
             </tr>
-          ))}
+          )}
         </tbody>
       </table>
     </div>

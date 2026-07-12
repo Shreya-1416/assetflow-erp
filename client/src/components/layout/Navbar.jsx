@@ -1,58 +1,86 @@
-import { FiBell, FiSearch, FiUser } from "react-icons/fi";
+import {
+  FiBell,
+  FiCalendar,
+  FiSearch,
+  FiSettings,
+  FiUser,
+} from "react-icons/fi";
 
 function Navbar() {
   return (
-    <header className="h-20 bg-white border-b border-slate-200 shadow-sm flex items-center justify-between px-8">
-      {/* Left Section */}
+    <header className="sticky top-0 z-40 flex h-20 items-center justify-between border-b border-slate-200 bg-white px-8 shadow-sm">
+
+      {/* Left */}
       <div>
         <h2 className="text-2xl font-bold text-slate-800">
-          Enterprise Asset Management
+          Enterprise Asset Management System
         </h2>
 
-        <p className="text-sm text-slate-500">
-          Manage organizational assets efficiently
-        </p>
+        <div className="mt-1 flex items-center gap-2 text-sm text-slate-500">
+          <FiCalendar />
+          <span>12 July 2026</span>
+        </div>
       </div>
 
-      {/* Right Section */}
-      <div className="flex items-center gap-6">
+      {/* Right */}
+      <div className="flex items-center gap-5">
+
         {/* Search */}
-        <div className="relative">
-          <FiSearch className="absolute left-3 top-3 text-slate-400" />
+        <div className="relative hidden lg:block">
+
+          <FiSearch className="absolute left-4 top-3.5 text-slate-400" />
 
           <input
             type="text"
-            placeholder="Search..."
-            className="w-64 rounded-lg border border-slate-300 py-2 pl-10 pr-4 focus:border-blue-500 focus:outline-none"
+            placeholder="Search assets, employees..."
+            className="w-80 rounded-xl border border-slate-300 bg-slate-50 py-3 pl-11 pr-4 outline-none transition focus:border-blue-600 focus:bg-white"
           />
+
         </div>
 
         {/* Notification */}
-        <button className="relative rounded-full bg-slate-100 p-3 hover:bg-slate-200">
+        <button className="relative rounded-xl bg-slate-100 p-3 transition hover:bg-slate-200">
+
           <FiBell className="text-xl text-slate-700" />
 
-          <span className="absolute -top-1 -right-1 h-5 w-5 rounded-full bg-red-500 text-xs text-white flex items-center justify-center">
+          <span className="absolute -right-1 -top-1 flex h-5 w-5 items-center justify-center rounded-full bg-red-500 text-xs font-bold text-white">
             3
           </span>
+
+        </button>
+
+        {/* Settings */}
+        <button className="rounded-xl bg-slate-100 p-3 transition hover:bg-slate-200">
+
+          <FiSettings className="text-xl text-slate-700" />
+
         </button>
 
         {/* Profile */}
-        <div className="flex items-center gap-3">
-          <div className="h-11 w-11 rounded-full bg-blue-600 text-white flex items-center justify-center">
+        <div className="flex items-center gap-3 rounded-xl border border-slate-200 bg-white px-4 py-2 shadow-sm">
+
+          <div className="flex h-12 w-12 items-center justify-center rounded-full bg-blue-600 text-xl text-white">
+
             <FiUser />
+
           </div>
 
           <div>
-            <p className="font-semibold text-slate-800">
+
+            <h3 className="font-semibold text-slate-800">
               Admin
-            </p>
+            </h3>
 
             <p className="text-xs text-slate-500">
-              Asset Manager
+              System Administrator
             </p>
+
           </div>
+
         </div>
+
       </div>
+
     </header>
   );
 }

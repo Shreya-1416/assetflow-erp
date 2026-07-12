@@ -1,6 +1,6 @@
 function AssetCard({ title, value, color }) {
   return (
-    <div className="rounded-xl bg-white border border-slate-200 shadow-md p-6">
+    <div className="rounded-xl bg-white border border-slate-200 shadow-md p-6 transition-all duration-300 hover:-translate-y-1 hover:shadow-xl cursor-pointer">
       <h3 className="text-sm font-medium text-slate-500">
         {title}
       </h3>

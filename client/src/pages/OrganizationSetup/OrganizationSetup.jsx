@@ -46,7 +46,8 @@ function OrganizationSetup() {
 
   return (
     <div className="space-y-8">
-      <div>
+      <div className="flex items-center gap-3">
+
         <h1 className="text-4xl font-bold text-slate-800">
           Organization Setup
         </h1>
