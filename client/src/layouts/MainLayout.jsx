@@ -18,6 +18,10 @@ function MainLayout() {
       </div>
     </div>
   );
+
+  <footer className="mt-10 border-t pt-6 text-center text-sm text-slate-500">
+  © 2026 AssetFlow ERP | Built for Hackathon
+</footer>
 }
 
 export default MainLayout;
