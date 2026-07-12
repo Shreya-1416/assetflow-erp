@@ -1,4 +1,4 @@
-﻿{
+{
   "name": "assetflow-erp-server",
   "version": "1.0.0",
   "description": "Backend API for AssetFlow ERP",
@@ -6,7 +6,7 @@
   "scripts": {
     "dev": "nodemon server.js",
     "start": "node server.js",
-    "check": "node --check server.js && node --check src/app.js && node --check src/config/db.js && node --check src/controllers/auth.controller.js && node --check src/controllers/categoryController.js && node --check src/controllers/departmentController.js && node --check src/middleware/auth.js && node --check src/middleware/errorHandler.js && node --check src/middleware/roles.js && node --check src/models/Category.js && node --check src/models/Department.js && node --check src/models/User.js && node --check src/routes/auth.routes.js && node --check src/routes/categoryRoutes.js && node --check src/routes/departmentRoutes.js && node --check src/services/auth.service.js && node --check src/services/categoryService.js && node --check src/services/departmentService.js && node --check src/utils/ApiError.js && node --check src/utils/asyncHandler.js && node --check src/utils/constants.js && node --check src/validations/auth.validation.js && node --check src/validations/categoryValidation.js && node --check src/validations/departmentValidation.js"
+    "check": "node --check server.js && node --check src/app.js && node --check src/config/db.js && node --check src/controllers/assetController.js && node --check src/controllers/auth.controller.js && node --check src/controllers/categoryController.js && node --check src/controllers/departmentController.js && node --check src/controllers/employeeController.js && node --check src/middleware/assetUpload.js && node --check src/middleware/auth.js && node --check src/middleware/errorHandler.js && node --check src/middleware/roles.js && node --check src/models/Asset.js && node --check src/models/Category.js && node --check src/models/Counter.js && node --check src/models/Department.js && node --check src/models/User.js && node --check src/repositories/assetRepository.js && node --check src/repositories/categoryRepository.js && node --check src/repositories/counterRepository.js && node --check src/repositories/departmentRepository.js && node --check src/repositories/userRepository.js && node --check src/routes/assetRoutes.js && node --check src/routes/auth.routes.js && node --check src/routes/categoryRoutes.js && node --check src/routes/departmentRoutes.js && node --check src/routes/employeeRoutes.js && node --check src/services/assetService.js && node --check src/services/auth.service.js && node --check src/services/categoryService.js && node --check src/services/departmentService.js && node --check src/services/employeeService.js && node --check src/utils/ApiError.js && node --check src/utils/asyncHandler.js && node --check src/utils/constants.js && node --check src/validations/assetValidation.js && node --check src/validations/auth.validation.js && node --check src/validations/categoryValidation.js && node --check src/validations/departmentValidation.js && node --check src/validations/employeeValidation.js"
   },
   "keywords": [
     "assetflow",
@@ -22,7 +22,9 @@
     "dotenv": "^16.4.5",
     "express": "^4.19.2",
     "jsonwebtoken": "^9.0.2",
-    "mongoose": "^8.5.1"
+    "mongoose": "^8.5.1",
+    "multer": "^2.2.0",
+    "qrcode": "^1.5.4"
   },
   "devDependencies": {
     "nodemon": "^3.1.4"
