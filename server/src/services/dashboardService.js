@@ -7,10 +7,10 @@ const transferRequestRepository = require("../repositories/transferRequestReposi
 class DashboardService {
   async getDashboardKPIs() {
     // 1. Assets Available
-    const availableAssets = await assetRepository.findAll({ status: "Available", isDeleted: false });
+    const availableAssets = await assetRepository.findMany({ filter: { status: "Available", isDeleted: false } });
     
     // 2. Assets Allocated
-    const allocatedAssets = await assetRepository.findAll({ status: "Allocated", isDeleted: false });
+    const allocatedAssets = await assetRepository.findMany({ filter: { status: "Allocated", isDeleted: false } });
     
     // 3. Maintenance Today
     const today = new Date();
@@ -27,10 +27,10 @@ class DashboardService {
     const activeBookings = await bookingRepository.findAll({ status: "Ongoing" });
     
     // 5. Pending Transfers
-    const pendingTransfers = await transferRequestRepository.findAll({ status: "Pending" });
+    const pendingTransfers = await transferRequestRepository.findMany({ filter: { status: "Pending" } });
     
     // 6. Upcoming Returns & Overdue Returns
-    const activeAllocations = await allocationRepository.findAll({ status: "Active" });
+    const activeAllocations = await allocationRepository.findMany({ filter: { status: "Active" } });
     const upcomingReturns = [];
     const overdueReturns = [];
     

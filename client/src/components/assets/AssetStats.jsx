@@ -1,25 +1,25 @@
 import AssetCard from "./AssetCard";
 
-function AssetStats() {
+function AssetStats({ assets = [] }) {
   const stats = [
     {
       title: "Total Assets",
-      value: 256,
+      value: assets.length,
       color: "text-blue-600",
     },
     {
       title: "Available",
-      value: 178,
+      value: assets.filter(a => a.status === 'Available').length,
       color: "text-green-600",
     },
     {
       title: "Allocated",
-      value: 62,
+      value: assets.filter(a => a.status === 'Allocated').length,
       color: "text-orange-500",
     },
     {
       title: "Maintenance",
-      value: 16,
+      value: assets.filter(a => a.status === 'Maintenance').length,
       color: "text-red-500",
     },
   ];

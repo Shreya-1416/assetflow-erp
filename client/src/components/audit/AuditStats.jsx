@@ -1,26 +1,26 @@
 import AssetCard from "../assets/AssetCard";
 
-function AuditStats() {
+function AuditStats({ cycles = [] }) {
   const stats = [
     {
-      title: "Audited",
-      value: 185,
+      title: "Total Cycles",
+      value: cycles.length,
+      color: "text-blue-600",
+    },
+    {
+      title: "Open",
+      value: cycles.filter(c => c.status === 'Open').length,
       color: "text-green-600",
     },
     {
-      title: "Pending",
-      value: 32,
+      title: "In Progress",
+      value: cycles.filter(c => c.status === 'In Progress').length,
       color: "text-orange-500",
     },
     {
-      title: "Mismatch",
-      value: 9,
-      color: "text-red-600",
-    },
-    {
-      title: "Missing",
-      value: 3,
-      color: "text-blue-600",
+      title: "Closed",
+      value: cycles.filter(c => c.status === 'Closed').length,
+      color: "text-slate-600",
     },
   ];
 

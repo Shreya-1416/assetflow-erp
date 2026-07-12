@@ -1,3 +1,4 @@
+import { useState, useEffect } from "react";
 import {
   FiBox,
   FiCheckCircle,
@@ -6,44 +7,70 @@ import {
   FiRepeat,
   FiClock,
 } from "react-icons/fi";
-
+import apiClient from "../../api/apiClient";
 import StatsCard from "./StatsCard";
 
 function OverviewCards() {
+  const [kpiData, setKpiData] = useState(null);
+  const [isLoading, setIsLoading] = useState(true);
+
+  useEffect(() => {
+    const fetchKPIs = async () => {
+      try {
+        const response = await apiClient.get("/dashboard/kpis");
+        if (response.success) {
+          setKpiData(response.data);
+        }
+      } catch (error) {
+        console.error("Failed to fetch dashboard KPIs", error);
+      } finally {
+        setIsLoading(false);
+      }
+    };
+    
+    if (localStorage.getItem("token")) {
+      fetchKPIs();
+    }
+  }, []);
+
+  if (isLoading) {
+    return <div className="text-slate-500 text-center py-4">Loading stats...</div>;
+  }
+
   const stats = [
     {
       title: "Available Assets",
-      value: 128,
+      value: kpiData?.assetsAvailableCount || 0,
       icon: <FiBox />,
       color: "bg-blue-600",
     },
     {
       title: "Allocated Assets",
-      value: 76,
+      value: kpiData?.assetsAllocatedCount || 0,
       icon: <FiCheckCircle />,
       color: "bg-green-600",
     },
     {
       title: "Maintenance Today",
-      value: 4,
+      value: kpiData?.maintenanceTodayCount || 0,
       icon: <FiTool />,
       color: "bg-orange-500",
     },
     {
       title: "Active Bookings",
-      value: 12,
+      value: kpiData?.activeBookingsCount || 0,
       icon: <FiCalendar />,
       color: "bg-purple-600",
     },
     {
       title: "Pending Transfers",
-      value: 5,
+      value: kpiData?.pendingTransfersCount || 0,
       icon: <FiRepeat />,
       color: "bg-red-500",
     },
     {
       title: "Upcoming Returns",
-      value: 9,
+      value: kpiData?.upcomingReturnsCount || 0,
       icon: <FiClock />,
       color: "bg-cyan-600",
     },

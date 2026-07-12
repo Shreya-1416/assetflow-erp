@@ -1,46 +1,56 @@
-import { FiBox, FiCalendar, FiTool } from "react-icons/fi";
+import { useState, useEffect } from "react";
+import apiClient from "../../api/apiClient";
 
-function QuickActions() {
-  const actions = [
-    {
-      title: "Register Asset",
-      icon: <FiBox />,
-      color: "bg-blue-600",
-    },
-    {
-      title: "Book Resource",
-      icon: <FiCalendar />,
-      color: "bg-green-600",
-    },
-    {
-      title: "Raise Maintenance",
-      icon: <FiTool />,
-      color: "bg-orange-500",
-    },
-  ];
+function RecentActivity() {
+  const [logs, setLogs] = useState([]);
+  const [isLoading, setIsLoading] = useState(true);
+
+  useEffect(() => {
+    const fetchLogs = async () => {
+      try {
+        const response = await apiClient.get("/system/logs");
+        if (response.success) {
+          setLogs(response.data.slice(0, 5)); // Just take the 5 most recent
+        }
+      } catch (error) {
+        console.error("Failed to fetch recent activity", error);
+      } finally {
+        setIsLoading(false);
+      }
+    };
+    
+    if (localStorage.getItem("token")) {
+      fetchLogs();
+    }
+  }, []);
 
   return (
     <div className="bg-white rounded-xl shadow-md p-6 border border-gray-200">
       <h2 className="text-xl font-semibold mb-5">
-        Quick Actions
+        Recent Activity
       </h2>
-
-      <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
-        {actions.map((action) => (
-          <button
-            key={action.title}
-            className={`${action.color} text-white rounded-lg p-5 flex flex-col items-center gap-3 hover:opacity-90 transition`}
-          >
-            <div className="text-3xl">{action.icon}</div>
-
-            <span className="font-medium">
-              {action.title}
-            </span>
-          </button>
-        ))}
-      </div>
+      
+      {isLoading ? (
+        <div className="text-slate-500 py-4 text-center">Loading activity...</div>
+      ) : logs.length === 0 ? (
+        <div className="text-slate-500 py-4">No recent activity.</div>
+      ) : (
+        <div className="space-y-4">
+          {logs.map((log) => (
+            <div key={log._id} className="flex flex-col gap-1 border-b border-slate-100 pb-3 last:border-0 last:pb-0">
+              <div className="flex justify-between items-start">
+                <span className="font-medium text-slate-800">{log.action}</span>
+                <span className="text-xs text-slate-500">
+                  {new Date(log.createdAt).toLocaleString()}
+                </span>
+              </div>
+              <p className="text-sm text-slate-600">{log.message || "No additional details"}</p>
+            </div>
+          ))}
+        </div>
+      )}
     </div>
   );
 }
 
-export default QuickActions;
+export default RecentActivity;

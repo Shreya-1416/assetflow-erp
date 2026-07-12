@@ -1,25 +1,43 @@
+import { useState, useEffect } from "react";
+import apiClient from "../../api/apiClient";
 import AssetCard from "../assets/AssetCard";
 
 function ReportStats() {
+  const [kpiData, setKpiData] = useState(null);
+
+  useEffect(() => {
+    const fetchKPIs = async () => {
+      try {
+        const response = await apiClient.get("/dashboard/kpis");
+        if (response.success) {
+          setKpiData(response.data);
+        }
+      } catch (error) {
+        console.error("Failed to fetch KPIs", error);
+      }
+    };
+    fetchKPIs();
+  }, []);
+
   const stats = [
     {
-      title: "Assets",
-      value: 256,
+      title: "Total Assets",
+      value: (kpiData?.assetsAvailableCount || 0) + (kpiData?.assetsAllocatedCount || 0),
       color: "text-blue-600",
     },
     {
-      title: "Bookings",
-      value: 84,
+      title: "Active Bookings",
+      value: kpiData?.activeBookingsCount || 0,
       color: "text-green-600",
     },
     {
-      title: "Maintenance",
-      value: 18,
+      title: "Maintenance Today",
+      value: kpiData?.maintenanceTodayCount || 0,
       color: "text-orange-500",
     },
     {
-      title: "Audits",
-      value: 56,
+      title: "Pending Transfers",
+      value: kpiData?.pendingTransfersCount || 0,
       color: "text-red-600",
     },
   ];

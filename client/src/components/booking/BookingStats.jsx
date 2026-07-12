@@ -1,25 +1,29 @@
 import AssetCard from "../assets/AssetCard";
 
-function BookingStats() {
+function BookingStats({ bookings = [] }) {
   const stats = [
     {
       title: "Today's Bookings",
-      value: 18,
+      value: bookings.filter(b => {
+        const today = new Date();
+        const start = new Date(b.startTime);
+        return start.getDate() === today.getDate() && start.getMonth() === today.getMonth();
+      }).length,
       color: "text-blue-600",
     },
     {
       title: "Active",
-      value: 12,
+      value: bookings.filter(b => b.status === 'Ongoing').length,
       color: "text-green-600",
     },
     {
       title: "Completed",
-      value: 41,
+      value: bookings.filter(b => b.status === 'Completed').length,
       color: "text-orange-500",
     },
     {
       title: "Cancelled",
-      value: 5,
+      value: bookings.filter(b => b.status === 'Cancelled').length,
       color: "text-red-600",
     },
   ];
