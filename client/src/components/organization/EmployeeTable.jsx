@@ -18,7 +18,7 @@ function EmployeeTable({ employees = [] }) {
         <tbody>
           {employees.map((emp) => (
             <tr
-              key={emp._id}
+              key={emp.id}
               className="border-t border-slate-200 hover:bg-slate-50 transition-colors duration-200"
             >
               <td className="px-6 py-4 font-medium text-slate-800">
