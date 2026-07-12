@@ -1,7 +1,9 @@
-const express = require("express");
+﻿const express = require("express");
 const cors = require("cors");
 
 const authRoutes = require("./routes/auth.routes");
+const departmentRoutes = require("./routes/departmentRoutes");
+const categoryRoutes = require("./routes/categoryRoutes");
 const errorHandler = require("./middleware/errorHandler");
 
 const app = express();
@@ -17,6 +19,8 @@ app.get("/health", (req, res) => {
 });
 
 app.use("/auth", authRoutes);
+app.use("/departments", departmentRoutes);
+app.use("/categories", categoryRoutes);
 
 app.use((req, res) => {
   res.status(404).json({
